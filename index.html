@@ -101,14 +101,19 @@
         </button>
     </div>
     <script>
-        let count = 0;
+        // Initialize count from localStorage
+        let count = localStorage.getItem('count') ? parseInt(localStorage.getItem('count')) : 0;
         const countElement = document.getElementById('count');
         const button = document.getElementById('clickerButton');
         const vibrationEffect = document.getElementById('vibrationEffect');
 
+        // Update the counter display
+        countElement.textContent = count;
+
         button.addEventListener('click', (event) => {
             count++;
             countElement.textContent = count;
+            localStorage.setItem('count', count);
 
             // Get the click position relative to the button
             const rect = button.getBoundingClientRect();
