@@ -20,10 +20,9 @@
 
         .container {
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            width: 100%;
+            height: 100%;
+            position: relative;
         }
 
         .count-container {
@@ -102,19 +101,17 @@
         </button>
     </div>
     <script>
-        // Initialize count from localStorage
-        let count = localStorage.getItem('count') ? parseInt(localStorage.getItem('count')) : 0;
+        let count = localStorage.getItem('clickCount') ? parseInt(localStorage.getItem('clickCount')) : 0;
         const countElement = document.getElementById('count');
         const button = document.getElementById('clickerButton');
         const vibrationEffect = document.getElementById('vibrationEffect');
 
-        // Update the counter display
         countElement.textContent = count;
 
         button.addEventListener('click', (event) => {
             count++;
             countElement.textContent = count;
-            localStorage.setItem('count', count);
+            localStorage.setItem('clickCount', count);
 
             // Get the click position relative to the button
             const rect = button.getBoundingClientRect();
