@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clicker Page</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: url('https://i.ibb.co/Lv8Xsf9/422f58d3-f8a7-4ed0-a9ad-2ca8bc8b2c99.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .container {
+            text-align: center;
+        }
+        .count-container {
+            margin-bottom: 20px; /* Space between counter and button */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .count {
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            margin-left: 20px; /* Space between image and counter */
+            position: relative;
+            left: -30px; /* Move the counter slightly left */
+        }
+        .button {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: url('https://i.ibb.co/6ZMy8kx/9d3ed06b-84df-4b01-88db-fab1a06232d0.png') no-repeat center center;
+            background-size: cover;
+            border: none;
+            cursor: pointer;
+            outline: none;
+            position: relative;
+            overflow: hidden;
+        }
+        .button:active {
+            animation: vibrate 0.2s;
+        }
+        .vibration-effect {
+            position: absolute;
+            font-size: 24px;
+            font-weight: bold; /* Make the text bold */
+            color: white;
+            text-shadow: 0 0 2px black; /* Optional: add shadow for better visibility */
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        @keyframes vibrate {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+        .image {
+            width: 30px; /* Set image size to 30x30 pixels */
+            height: 30px; /* Set image height to 30 pixels */
+            margin-right: 20px; /* Space between image and counter */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="count-container">
+            <img src="https://i.ibb.co/2WrDv5n/IMG-20240723-WA0002-photoaidcom-cropped-jpg-1.png" alt="Counter Image" class="image">
+            <div class="count" id="count">0</div>
+        </div>
+        <button class="button" id="clickerButton">
+            <div class="vibration-effect" id="vibrationEffect">+1</div>
+        </button>
+    </div>
+    <script>
+        let count = 0;
+        const countElement = document.getElementById('count');
+        const button = document.getElementById('clickerButton');
+        const vibrationEffect = document.getElementById('vibrationEffect');
+
+        button.addEventListener('click', (event) => {
+            count++;
+            countElement.textContent = count;
+
+            // Get the click position relative to the button
+            const rect = button.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            // Position the vibration effect
+            vibrationEffect.style.left = `${x}px`;
+            vibrationEffect.style.top = `${y}px`;
+            vibrationEffect.style.opacity = 1;
+
+            // Hide vibration effect after 2 seconds
+            setTimeout(() => {
+                vibrationEffect.style.opacity = 0;
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
