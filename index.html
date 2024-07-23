@@ -19,7 +19,7 @@
             text-align: center;
         }
         .count-container {
-            margin-bottom: 20px; /* Space between counter and button */
+            margin-bottom: 40px; /* Space between counter and button */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -33,8 +33,8 @@
             left: -30px; /* Move the counter slightly left */
         }
         .button {
-            width: 200px;
-            height: 200px;
+            width: 250px; /* Increased size */
+            height: 250px; /* Increased size */
             border-radius: 50%;
             background: url('https://i.ibb.co/6ZMy8kx/9d3ed06b-84df-4b01-88db-fab1a06232d0.png') no-repeat center center;
             background-size: cover;
@@ -83,14 +83,17 @@
         </button>
     </div>
     <script>
-        let count = 0;
+        let count = localStorage.getItem('count') ? parseInt(localStorage.getItem('count')) : 0;
         const countElement = document.getElementById('count');
         const button = document.getElementById('clickerButton');
         const vibrationEffect = document.getElementById('vibrationEffect');
 
+        countElement.textContent = count;
+
         button.addEventListener('click', (event) => {
             count++;
             countElement.textContent = count;
+            localStorage.setItem('count', count);
 
             // Get the click position relative to the button
             const rect = button.getBoundingClientRect();
